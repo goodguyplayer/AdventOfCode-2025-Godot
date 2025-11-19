@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgj4lblld2imt"]
+
+[ext_resource type="PackedScene" uid="uid://dh6e8y0nlrbwq" path="res://tools/helpers/day_panel/day_panel.tscn" id="1_72sf7"]
+[ext_resource type="Script" uid="uid://b8oqlkwflmm88" path="res://days/day_0/day_0.gd" id="1_r6qit"]
+[ext_resource type="Script" uid="uid://bwilsp232hsuj" path="res://tools/helpers/file_handler/file_handler.gd" id="2_r6qit"]
+
+[node name="Day0" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r6qit")
+
+[node name="DayPanel" parent="." instance=ExtResource("1_72sf7")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="FileHandler" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_r6qit")
+metadata/_custom_type_script = "uid://bwilsp232hsuj"
+
+[node name="TextEdit" type="TextEdit" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 679.0
+offset_top = 106.0
+offset_right = 1222.0
+offset_bottom = 413.0

@@ -33,11 +33,11 @@ func update_log_text(text: String) -> void:
 
 
 func _cha_1_pressed() -> void:
-	challenge_1_pressed.emit(test_mode.toggle_mode)
+	challenge_1_pressed.emit(test_mode.button_pressed)
 
 
 func _cha_2_pressed() -> void:
-	challenge_2_pressed.emit(test_mode.toggle_mode)
+	challenge_2_pressed.emit(test_mode.button_pressed)
 
 
 func _reset_pressed() -> void:
