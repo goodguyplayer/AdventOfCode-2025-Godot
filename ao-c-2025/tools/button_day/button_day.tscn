@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://wptlx1h8jahe"]
+
+[ext_resource type="Script" uid="uid://bmcwgl78vf2oe" path="res://tools/button_day/button_day.gd" id="1_2p5k4"]
+
+[node name="ButtonDay" type="Button"]
+theme_override_colors/font_color = Color(0, 0.8, 0, 1)
+theme_override_colors/font_hover_color = Color(0.6, 1, 0.6, 1)
+theme_override_font_sizes/font_size = 64
+script = ExtResource("1_2p5k4")
