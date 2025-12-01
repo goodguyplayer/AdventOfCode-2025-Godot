@@ -4,6 +4,9 @@ extends Control
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var quit: Button = %Button
 
+@export var days: int = 12
+@export var enable_debug: bool = false
+
 
 var _btn_path: StringName = "uid://wptlx1h8jahe"
 
@@ -11,7 +14,8 @@ var _day_path: StringName = "res://days/day_{0}/day_{0}.tscn"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	for i in range(0, 25):
+	if enable_debug: add_button(0)
+	for i in range(1, days + 1):
 		add_button(i)
 	
 	quit.pressed.connect(_quit)
