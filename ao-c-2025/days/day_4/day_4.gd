@@ -10,6 +10,7 @@ var _challenge_file: StringName = "res://challenge_files/day_4/challenge.txt"
 
 func _ready() -> void:
 	day_panel.challenge_1_pressed.connect(solve_challenge_1)
+	day_panel.challenge_2_pressed.connect(solve_challenge_2)
 
 
 func solve_challenge_1(test: bool) -> void:
@@ -44,6 +45,14 @@ func solve_challenge_1(test: bool) -> void:
 	day_panel.update_log_text("Status.: Finished Challenge 1")
 		
 
+func solve_challenge_2(test: bool) -> void:
+	day_panel.update_log_text("Status.: Running Challenge 2")
+	var data: Array = _load_data(test)
+	var total: int = remove_papers(data)
+	print("Total.: {0}".format([total]))
+	day_panel.update_log_text("Status.: Finished Challenge 2")
+
+
 
 
 func is_paper_near(data: Array, to_check_x: int, to_check_y: int) -> bool:
@@ -54,6 +63,39 @@ func is_paper_near(data: Array, to_check_x: int, to_check_y: int) -> bool:
 	if data[to_check_x][to_check_y] != "@":
 		return false
 	return true
+
+
+func remove_papers(data_input) -> int:
+	var count: int
+	var total: int = 0
+	var visual_data: Array
+	for i in len(data_input):
+		visual_data.append([])
+		for j in len(data_input[i]):
+			if data_input[i][j] == ".":
+				visual_data[i].append(".")
+				continue
+			count = 0
+			count += 1 if is_paper_near(data_input, i-1, j-1) else 0
+			count += 1 if is_paper_near(data_input, i-1, j) else 0
+			count += 1 if is_paper_near(data_input, i-1, j+1) else 0
+			count += 1 if is_paper_near(data_input, i, j-1) else 0
+			count += 1 if is_paper_near(data_input, i, j+1) else 0
+			count += 1 if is_paper_near(data_input, i+1, j-1) else 0
+			count += 1 if is_paper_near(data_input, i+1, j) else 0
+			count += 1 if is_paper_near(data_input, i+1, j+1) else 0
+			if count < 4:
+				total += 1
+				visual_data[i].append(".")
+			else:
+				visual_data[i].append(data_input[i][j])
+	print("-----------------------------------")
+	print("Total removed.: {0}".format([total]))
+	# for i in visual_data:
+	# 	print(i)
+	if total == 0:
+		return 0
+	return total + remove_papers(visual_data)
 
 
 
