@@ -26,7 +26,13 @@ func solve_challenge_1(test: bool) -> void:
 
 func solve_challenge_2(test: bool) -> void:
 	day_panel.update_log_text("Status.: Running Challenge 2")
-	_load_data(test)
+	var ingredients: Ingredients = _load_data(test)
+	var data_output: Array = ingredients.all_ranges()
+	var total: int = 0
+	for i in data_output:
+		total += (i[1] + 1- i[0])
+	print(data_output)
+	print("Total.: {0}".format([total]))
 	day_panel.update_log_text("Status.: Finished Challenge 2")
 
 
