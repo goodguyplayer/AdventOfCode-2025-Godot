@@ -30,7 +30,7 @@ func challenge_1_solve(test: bool) -> void:
 	regex.compile("\\^")
 	for line_ind in range(1, len(data)):
 		# print("--------------------------")
-		beams = unique_array(beams)
+		# beams = unique_array(beams)
 		helper = regex.search_all(data[line_ind])
 		for found in helper:
 			if beams.has(found.get_start()):
@@ -42,7 +42,7 @@ func challenge_1_solve(test: bool) -> void:
 	# 	print(total_splits)
 	# print(total_splits)
 	print("Total splits.: {0}".format([total_splits]))
-	# print("Total beams.: {0}".format([beams]))
+	print("Total beams.: {0}".format([beams.size()]))
 	print(beams)
 	
 
@@ -51,8 +51,61 @@ func challenge_1_solve(test: bool) -> void:
 
 func challenge_2_solve(test: bool) -> void:
 	day_panel.update_log_text("Status.: Running Challenge 2")
+	var data: Array = _load_data(test)
+	var data_converted: Array = []
+	var helper: Array = []
+	var regex = RegEx.new()
+	var value_above: int = 0
+	regex.compile("S")
+	var beam: int = regex.search(data[0]).get_start()
+	# var total: int = iterate_beams(beam, 1, data)
+	# print(total)
+	for line in range(len(data)):
+		helper = []
+		for pos in range(len(data[line])):
+			if data[line][pos] == ".":
+				helper.append(0)
+			else:
+				helper.append(data[line][pos])
+		data_converted.append(helper)
 
+	data_converted[1][beam] = 1
+	
+	for line in range(2, len(data_converted)):
+		for pos in range(len(data_converted[line])):
+			if str(data_converted[line][pos]) == "^":
+
+				data_converted[line][pos - 1] += data_converted[line - 1][pos]
+				data_converted[line][pos + 1] += data_converted[line - 1][pos]
+				data_converted[line][pos] = 0
+			else:
+				data_converted[line][pos] += data_converted[line - 1][pos]
+
+		# print(data_converted[line])
+	
+	print(data_converted[-1].reduce(func(accum, number): return accum + number, 0))
 	day_panel.update_log_text("Status.: Finished Challenge 2")
+
+
+
+# UNUSED
+func iterate_beams(position, line_index, data_array) -> int:
+	# if line_index == data_array.size():
+	# 	return 1
+	
+	var count: int = 0
+	for line in range(line_index, len(data_array)):
+		if data_array[line][position] == "^":
+			# print("Split (left) at pos {0}, index {1}".format([position - 1, line]))
+			count += iterate_beams(position - 1, line, data_array)
+			# print(count)
+			# print("Split (right) at pos {0}, index {1}".format([position + 1, line]))
+			count += iterate_beams(position + 1, line, data_array)
+			# print(count)
+			return count
+	return 1
+
+
 
 
 
