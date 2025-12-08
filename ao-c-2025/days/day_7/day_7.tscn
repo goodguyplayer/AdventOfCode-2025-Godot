@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bke1nexytbxl2"]
+
+[ext_resource type="Script" uid="uid://2owko672ofda" path="res://days/day_7/day_7.gd" id="1_7unm7"]
+[ext_resource type="PackedScene" uid="uid://dh6e8y0nlrbwq" path="res://tools/helpers/day_panel/day_panel.tscn" id="2_nnc7d"]
+[ext_resource type="Script" uid="uid://bwilsp232hsuj" path="res://tools/helpers/file_handler/file_handler.gd" id="3_vk04u"]
+
+[node name="Day7" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7unm7")
+
+[node name="DayPanel" parent="." instance=ExtResource("2_nnc7d")]
+unique_name_in_owner = true
+layout_mode = 1
+day = 7
+
+[node name="FileHandler" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_vk04u")
+metadata/_custom_type_script = "uid://bwilsp232hsuj"
