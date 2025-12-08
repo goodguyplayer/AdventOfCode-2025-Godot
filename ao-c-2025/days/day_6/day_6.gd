@@ -55,10 +55,13 @@ func challenge_2_solve(test: bool) -> void:
 		count = 0
 		data_dict = {}
 		equation_result = 0
+		
+		## Store every possible position of data in initialized dict
 		for j in data[0][i]:
 			data_dict[count] = ""
 			count += 1
 
+		## For every possible equation line, reverse it and, for ever possible position, add to dict
 		for line in data:
 			reversed_data = line[i]
 			reversed_data.reverse()
@@ -68,6 +71,7 @@ func challenge_2_solve(test: bool) -> void:
 		for key in data_dict.keys():
 			data_dict[key] = int(data_dict[key])
 		
+		## Calculate results
 		# print(data_dict)
 		if equations[i] == "*":
 			equation_result = 1
